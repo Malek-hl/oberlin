@@ -1,7 +1,7 @@
 // ***-------------Module Importation--------------***//
 // Import express module: 
 const express = require("express");
-
+const jwt = require('jsonwebtoken')
 // Import body-parser module: 
 const bodyParser = require("body-parser");
 // const { match } = require("assert");
@@ -279,9 +279,20 @@ app.post("/users/login", (req, res) => {
         // return req.body.pwd== doc.pwd;
     }).then(
         (pwdResponse) => {
-            console.log("here pwdResponse", pwdResponse);
-            if (!pwdResponse) {
-                res.json({ msg: "1" });
+
+
+            if (pwdResponse) {
+                try {
+                    //console.log("here pwdResponse", user._id);
+                    const tokens = jwt.sign({
+                        data: user._id
+                    }, 'secret', { expiresIn: 60 * 60 })
+
+                    res.json({ user: user, token: tokens, msg: "2" });
+                } catch (error) {
+                    console.log('error1')
+                }
+
             } else {
                 // send user information {id, fName, lName, role}
                 // let userToSend = {
@@ -290,8 +301,8 @@ app.post("/users/login", (req, res) => {
                 //     lasmtName: user.lastName,
                 //     role: user.role,
                 // };
-                
-                res.send({ user: user._id,token: generateToken(user._id) , msg: "2" });
+
+                console.log('error2')
             }
         }
     )
@@ -301,24 +312,52 @@ app.post("/users/login", (req, res) => {
 // Search User By ID:
 app.post("/users/userId", (req, res) => {
     // let reqId = {$toObjectId: req.body.id};
-    let id = req.body.id;;
-    console.log("Here into BL:Search", req.body.id);
-    User.findOne({
-        _id: id
-    })
-        .then((doc) => {
-            console.log("Here doc AFTER SEARCH", doc);
-            if (!doc) {
-                res.json({ msg: "0" });
-            } else {
-                // let userToSend = {
-                //     firstName: doc.firstName,
-                //     lastName: doc.lastName,
-                //     role: doc.role,
-                // };
-                res.json({ user: doc, msg: "2" });
-            }
-        })
+  
+       let id = req.body.id;
+      console.log("Here into BL:Search", id);
+      User.findOne({
+          _id: id
+      })
+          .then((doc) => {
+              console.log("Here doc AFTER SEARCH", doc);
+              if (!doc) {
+                  res.json({ msg: "0" });
+              } else {
+                  // let userToSend = {
+                  //     firstName: doc.firstName,
+                  //     lastName: doc.lastName,
+                  //     role: doc.role,
+                  // };
+                  res.json({ user: doc, msg: "2" });
+              }
+          })
+})
+
+//myprofile
+app.post("/users/MyProfile", (req, res) => {
+    // let reqId = {$toObjectId: req.body.id};
+    const param = req.headers.token
+    console.log(param)
+    const decoded = jwt.verify(param, 'secret')
+    console.log('decoded', decoded)
+       let id = decoded.data;
+      console.log("Here into BL:Search", id);
+      User.findOne({
+          _id: id
+      })
+          .then((doc) => {
+              console.log("Here doc AFTER SEARCH", doc);
+              if (!doc) {
+                  res.json({ msg: "0" });
+              } else {
+                  // let userToSend = {
+                  //     firstName: doc.firstName,
+                  //     lastName: doc.lastName,
+                  //     role: doc.role,
+                  // };
+                  res.json({ user: doc, msg: "2" });
+              }
+          })
 })
 
 // Get All Users:
@@ -462,12 +501,12 @@ app.put("/users/deletePub", (req, res) => {
 });
 
 // GEt All pubs with Client DAta:
-app.get(("/users/pubsClient"), (req, res)=>{
+app.get(("/users/pubsClient"), (req, res) => {
     console.log("AAAAAAAAAA");
     Pub.aggregate(
         [
             {
-                 $match: { "status": "confirmed" } ,
+                $match: { "status": "confirmed" },
             },
             {
                 $lookup: {
@@ -488,22 +527,22 @@ app.get(("/users/pubsClient"), (req, res)=>{
 });
 
 // Show Client notifacation about his pub :
-app.put(("/users/notification"), (req, res) =>{
-    console.log("HERE NOTIFICATION",req.body);
-    Pub.updateOne({_id:req.body._id}, req.body).then(
-        (res)=>{
+app.put(("/users/notification"), (req, res) => {
+    console.log("HERE NOTIFICATION", req.body);
+    Pub.updateOne({ _id: req.body._id }, req.body).then(
+        (res) => {
             console.log(res);
             if (res.modifiedCount == 1) {
                 res.json({ msg: `User : Edited with success` });
-              } else {
+            } else {
                 res.json({ msg: `Not Edited` });
-              }
+            }
         }
     )
 });
 
 // Create Request between Accomp and client
-app.post(("/users/request"), (req,res)=>{
+app.post(("/users/request"), (req, res) => {
 
     console.log("here New Request:", req.body);
     let request = new Request({
@@ -540,12 +579,12 @@ app.post("/users/getRequest", (req, res) => {
         ],
         (error, docs) => {
             console.log("Request s Client", docs[0].client);
-            if(docs){
-                res.status(200).json({requests: docs});
-            } else {res.status(200).json({msg: "0"}); }
+            if (docs) {
+                res.status(200).json({ requests: docs });
+            } else { res.status(200).json({ msg: "0" }); }
         }
     );
- 
+
     // Request.find({ accompId: req.body.id }).then((doc) => {
     //     console.log("Search Reaquest", doc);
     //     if (doc) {

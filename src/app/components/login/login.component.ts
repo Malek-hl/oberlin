@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  emailError: any= "";
+  emailError: any = "";
   user: any = {};
   userExist: boolean = true;
   constructor(private formBuilder: FormBuilder,
@@ -28,13 +28,13 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log(this.loginForm.value.userName);
-    console.log(isNaN(this.loginForm.value.userName));    
+    console.log(isNaN(this.loginForm.value.userName));
     if (isNaN(this.loginForm.value.userName)) {
-      let email= this.loginForm.value.userName;
+      let email = this.loginForm.value.userName;
       delete this.loginForm.value.userName;
-      this.loginForm.value.email = email;      
+      this.loginForm.value.email = email;
     } else {
-      let tel= Number(this.loginForm.value.userName) ;
+      let tel = Number(this.loginForm.value.userName);
       delete this.loginForm.value.userName;
       this.loginForm.value.tel = tel;
     }
@@ -46,15 +46,18 @@ export class LoginComponent implements OnInit {
         if (response.msg != "2") {
           this.emailError = "Please check ur email/pwd";
         } else {
-          localStorage.setItem("connectedUserId", response.user);
+          localStorage.setItem("connectedUserId", response.token);
+
           if (response.user.role == "admin") {
             this.router.navigate(["admin"]);
-          } else if (response.user.role == "accompagnant"){
+          } else if (response.user.role == "accompagnant") {
             this.router.navigate([""]);
-          } else{ this.router.navigate([""]); }
+          } else { this.router.navigate([""]); }
         }
       }
-    );
+    )
+
+
   }
 
 }

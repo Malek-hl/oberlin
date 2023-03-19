@@ -1,12 +1,16 @@
-const jwt = require ('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 const generateToken = (id) => {
     console.log('token')
-    const SECRET='shifhhfjkzwudhiihoh1234'
-    return jwt.sign({id}, SECRET,{
-        expiresIn:'60s'
-    })
+    const SECRET = 'shifhhfjkzwudhiihoh1234'
+    return jwt.sign({
+        data: user._id
+    }, SECRET, { expiresIn: 60 * 60 })
 }
-module.exports =  {
-    generateToken
+const verifyToken = (token) => {
+   return  jwt.verify(token, 'secret')
+     }
+module.exports = {
+    generateToken,
+    verifyToken
 } 

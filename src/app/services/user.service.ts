@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,8 +61,15 @@ export class UserService {
   }
 
   // Search User By ID:
-  getUserById(id: any) {
-    return this.httpClient.post<{ msg: string, user: any }>(`${this.userUrl}/userId`, {id:id});
+  getUserById(id:any) {
+    // const token = localStorage.getItem("connectedUserId")
+   return this.httpClient.post<{ msg: string, user: any }>(`${this.userUrl}/userId`, {id: id});
+  }
+
+  getMyProfile() {
+    const token = localStorage.getItem("connectedUserId")
+   // const header =  { Authorization: `Bearer ${token}` } 
+    return this.httpClient.post<{ msg: string, user: any }>(`${this.userUrl}/MyProfile`, {token: token});
   }
   
 // Get All users
@@ -135,4 +142,5 @@ export class UserService {
   getRequest(id){
     return this.httpClient.post<{ requests:any, msg:any }>(`${this.userUrl}/getRequest`,{id});
   }
+
 }
