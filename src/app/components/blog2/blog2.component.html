@@ -1,0 +1,18 @@
+<section class="blog-one">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>06. Our Clients</p>
+            <h3>Stay Update with <br> Oberlin</h3>
+        </div><!-- /.block-title -->
+        <div class="row">
+            <div *ngFor="let c of clients " class="col-lg-4">
+                <app-user [userInfo]="c"></app-user>
+            </div><!-- /.row -->
+        </div>
+        <!-- <div class="row">
+            <div *ngFor="let c of clients " class="col-lg-4">
+                <app-user [userInfo]="c"></app-user>
+            </div>
+        </div>/.container -->
+    </div>
+</section><!-- /.blog-one -->

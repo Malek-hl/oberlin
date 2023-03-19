@@ -1,0 +1,138 @@
+<app-banner title="Accompagnant.."></app-banner>
+<section class="living-option-two">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="living-option-two__main">
+                    <div class="block-title text-left">
+                        <p class="has-line"> Dashbord</p><!-- /.has-line -->
+                    </div><!-- /.block-title text-left -->
+                    <div class="nav navtabs living-option-two__tab-title">
+                        <a href="#profile" data-toggle="tab" class="nav-link active">Profile*</a>
+                        <!-- /.nav-link -->
+                        <a href="#request" data-toggle="tab" class="nav-link ">Requests*</a>
+                        <!-- /.nav-link -->
+                        <!-- <a href="#client" data-toggle="tab" routerLink="displayPubs" class="nav-link">Clients*</a> -->
+                        <a href="#search" data-toggle="tab" class="nav-link">Search*</a>
+                        <!-- /.nav-link -->
+
+                    </div><!-- /.nav navtabs living-option-two__tab-title -->
+                </div><!-- /.living-option-two__main -->
+            </div><!-- /.col-lg-6 -->
+
+            <div class="col-lg-10">
+                <div class="tab-content">
+                    <div class="tab-pane fade active animated fadeInRight" id="profile">
+                        <div class="col-lg-10">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">First Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.firstName}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Last Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.lastName}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.email}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.tel}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Adress</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.adress}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Avatar</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <img [src]="data?.avatar" height="100px" width="100px" alt="">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-info " target="__blank">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade show  animated fadeInRight" id="request">
+                        <span *ngIf="msg">There is No Requests from clients</span>
+                        <table *ngIf="req.length" class="table text-center">
+                            <tr>
+                                <th>Client's First Name</th>
+                                <th>Client's Last Name</th>
+                                <th>Email</th>
+                                <th>Profile </th>
+                                <th>Action</th>
+                            </tr>
+                            <tr *ngFor="let r  of pageOfItems">
+                                <td>{{r.client[0].firstName}}</td>
+                                <td>{{r.client[0].lastName}}</td>
+                                <td>{{r.client[0].email}}</td>
+                                <td>
+                                    <!-- <button type="button" class="btn btn-primary position-relative">
+                                        Show Profile
+                                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                          
+                                        </span>
+                                      </button> -->
+                                    <button class="btn btn-primary py-2 px-3 text-white">Show Profile </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary py-2 px-3 text-white">Accept </button>
+                                    <button class="btn btn-secondary py-2 px-3 text-white">Cancel </button>
+                                </td>
+                            </tr>
+                            <!-- Pagination: justify-content-center -->
+                        </table>
+                        <div class="card-footer  pb-0 pt-3 ">
+                            <jw-pagination [items]="req" [pageSize]="6" (changePage)="onChangePage($event)"></jw-pagination>
+                        </div>
+                        
+
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="search">
+                     
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                </div><!-- /.tab-content -->
+            </div><!-- Profile -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.living-option-two -->

@@ -1,0 +1,63 @@
+<table class="table text-center">
+    <tr>
+        <th>First Name</th>
+        <th>Second Name</th>
+        <th>Tel</th>
+        <th>Adress</th>
+        <!-- <th>Role</th> -->
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <tr *ngFor="let u  of pageOfItems| userType: role">
+        <td>{{u.firstName}}</td>
+        <td>{{u.lastName}}</td>
+        <td>{{u.tel}}</td>
+        <td>{{u.adress}}</td>
+        <!-- <td>{{u.role}}</td> -->
+        <td >{{u.status}}</td>
+        <td>
+            <button (click)="delete(u._id)" class="btn btn-primary py-2 px-2 text-white">delete </button>
+            <button (click)="confirm(u._id)" class="btn btn-info py-2 px-2 text-white">Confirm </button>
+            <button (click)="goToDisplay(u._id)" class="btn btn-info py-2 px-2 text-white">Display </button>
+        </td>
+    </tr>
+    <!-- Pagination: justify-content-center -->
+</table>
+<div class="card-footer  pb-0 pt-3 ">
+    <jw-pagination [items]="users" [pageSize]="6" (changePage)="onChangePage($event)"></jw-pagination>
+</div>
+
+
+
+
+<!-- <section *ngIf="display" class="faq-three">
+        <div class="row high-gutter justify-content-center">
+            <div class="col-lg-4">
+                <div class="donation-one__single">
+                    <div class="donation-one__image">
+                        <img src="assets/images/donation/donation-1-1.jpg" alt="">
+                        <a href="donation-single.html">CV <i class="fal fa-plus"></i></a>
+                    </div>
+                    <div class="donation-one__content">
+                        <h4><a href="donation-single.html">Name:{{user.firstName}} {{user.lastName}}</a></h4>
+                        <h3><a href="donation-single.html">Role:{{user.role}}</a></h3>
+                        <p>Email: {{user.email}}</p>
+                        <p>Adress: {{user.adress}}</p>
+                        <p>Tel: {{user.tel}}</p>
+                        <div class="donation-one__progress">
+                            <b style="left: 12%;">Experience: {{user.exp}} years</b>
+                            <span style="width: 12%;"></span>
+                        </div>
+                       
+                        <div class="justify-content-center">
+                            <button (click)="delete(u._id)" class="thm-btn ">Delete</button>
+                            <button (click)="delete(u._id)" class="thm-btn ">Confirm</button>
+                        </div>
+                      
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section> -->

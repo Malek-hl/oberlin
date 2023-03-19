@@ -1,0 +1,207 @@
+<app-banner title="Client.."></app-banner>
+<section class="living-option-two">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="living-option-two__main">
+                    <div class="block-title text-left">
+                        <p class="has-line"> Dashbord</p><!-- /.has-line -->
+                    </div><!-- /.block-title text-left -->
+                    <div class="nav navtabs living-option-two__tab-title">
+                        <a href="#profile" data-toggle="tab" class="nav-link active">Profile*</a>
+                        <a href="#pub" data-toggle="tab" class="nav-link ">Publications*</a>
+                        <a href="#post" data-toggle="tab" class="nav-link ">Postuler*</a>
+                        <a href="#search" data-toggle="tab" class="nav-link ">Search*</a>
+                        <!-- /.nav-link -->
+                    </div><!-- /.nav navtabs living-option-two__tab-title -->
+                </div><!-- /.living-option-two__main -->
+            </div><!-- /.col-lg-6 -->
+
+            <div class="col-lg-10">
+                <div class="tab-content">
+                    <div class="tab-pane fade active animated fadeInRight" id="profile">
+                        <!-- <div class="col-lg-10 d-flex">
+                            <div class="my-auto">
+                                <div class="history-one__content">
+                                    <div class="block-title text-left">
+                                        <h2 class="has-line">First Name:</h2>
+                                        <h2 class="has-line">Last Name:</h2>
+                                        <h2 class="has-line">Tel:</h2>
+                                        <h2 class="has-line">Adress:</h2>
+                                        <h2 class="has-line">Email:</h2>
+                                        <h2 class="has-line">Avatar:</h2>
+                                    </div>
+                                    <button class="btn btn-primary py-2 px-3 text-white">Edit </button>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="col-lg-10">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">First Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.firstName}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Last Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.lastName}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.email}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.tel}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Adress</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{data.adress}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Avatar</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <img [src]="data?.avatar" height="100px" width="100px" alt="">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-info " target="__blank">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade show  animated fadeInRight" id="pub">
+                        <app-pub-table></app-pub-table>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="client">
+
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="post">
+
+                        <form #pubForm="ngForm" (ngSubmit)="add()" class="contact-one__form contact-form-validated">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" [(ngModel)]="pub.title" [ngModelOptions]="{standalone: true}"
+                                        placeholder="Title">
+                                    <!-- <div *ngIf="title.errors && (title.dirty || title.touched)">
+                                        <div *ngIf="title.errors?.['required']" class="red">
+                                            Title is required</div>
+                                        <div *ngIf="title.errors?.['required']" class="red">
+                                            Title must have at least 4 chars
+                                        </div>
+                                    </div> -->
+                                </div><!-- /.col-md-6 -->
+
+                                <div class="col-md-12">
+                                    <textarea name="message" [(ngModel)]="pub.description"
+                                        [ngModelOptions]="{standalone: true}" placeholder="Description"></textarea>
+                                </div><!-- /.col-md-12 -->
+
+                                <div class="col-md-12 text-center">
+                                    <button class="thm-btn contact-one__btn">Add</button>
+                                </div><!-- /.col-md-12 -->
+
+                            </div><!-- /.row -->
+                        </form>
+
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="search">
+                        <div class="sidebar__single sidebar__search">
+                            <!-- <h3 class="sidebar__title">Search</h3> -->
+                            <form #searchForm="ngForm" (ngSubmit)="searchAccompagnat()"
+                                class="contact-one__form contact-form-validated">
+                                <div class="row">
+                                    <label for=""> Adress: </label>
+                                    <div class="col-md-6 text-center">
+                                        <input type="text" [(ngModel)]="search.adress"
+                                            [ngModelOptions]="{standalone: true}">
+                                    </div>
+
+                                    <div class="row">
+                                        <label for=""> Experience: </label>
+                                        <div class="col-md-5 text-center">
+                                            <input type="number" placeholder="O" [(ngModel)]="search.first"
+                                                [ngModelOptions]="{standalone: true}">
+                                        </div>
+                                        <div class="col-md-5 text-center">
+                                            <input type="number" placeholder="25 years" [(ngModel)]="search.second"
+                                                [ngModelOptions]="{standalone: true}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <button class="thm-btn contact-one__btn">Search</button>
+                                    <!-- <span > Sorry, there's no accompagnant! Try again</span> -->
+                                </div>
+                            </form><!-- /.sidebar__search-form -->
+                        </div>
+
+                        <table *ngIf="accp.length" class="table text-center">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Second Name</th>
+                                <th>Tel</th>
+                                <th>Adress</th>
+                                <th>Experience</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr *ngFor="let u  of pageOfItems">
+                                <td>{{u.firstName}}</td>
+                                <td>{{u.lastName}}</td>
+                                <td>{{u.tel}}</td>
+                                <td>{{u.adress}}</td>
+                                <td>{{u.exp}}</td>
+                                <td>
+                                    <button class="btn btn-primary py-2 px-2 text-white">Consulter </button>
+                                </td>
+                            </tr>
+                            <!-- Pagination: justify-content-center -->
+                        </table>
+                        <div class="card-footer  pb-0 pt-3 ">
+                            <jw-pagination [items]="accp" [pageSize]="6"
+                                (changePage)="onChangePage($event)"></jw-pagination>
+                        </div>
+
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                </div><!-- /.tab-content -->
+
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.living-option-two -->

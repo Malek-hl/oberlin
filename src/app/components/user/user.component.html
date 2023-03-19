@@ -1,0 +1,19 @@
+
+<div class="team-one__single">
+    <div class="team-one__image">
+        <img [src]="userInfo.avatar" height="400px" width="100" alt="">
+    </div><!-- /.team-one__image -->
+    <div class="team-one__content">
+        <div class="team-one__content-inner">
+            <h3>{{userInfo.firstName}} {{userInfo.lastName}}</h3>
+            <p>Adress: {{userInfo.adress}}</p>
+            <p>Experience: {{userInfo.exp}} years</p>
+            <!-- <p *ngIf="userInfo.role=='client'">Title: {{clientPub[0].title}}</p> -->
+            <!-- <p>{{userInfo.description}}</p> -->
+            <div class="team-one__social">
+                <button (click)="clientReq(userInfo._id)" class="btn btn-primary py-2 px-2 text-white">Contact</button>
+                <button class="btn btn-info py-2 px-2 text-white">Display Profile</button>
+            </div><!-- /.team-one__social -->
+        </div><!-- /.team-one__content-inner -->
+    </div><!-- /.team-one__content -->
+</div>

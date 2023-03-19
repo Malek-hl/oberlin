@@ -1,0 +1,170 @@
+<app-banner [title]=formTitle></app-banner>
+<section class="contact-info-one">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>Contact Us</p>
+            <h3>Get In Touch</h3>
+        </div><!-- /.block-title -->
+        <div class="row">
+            <div class="col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                <div class="contact-info-one__single text-center">
+                    <div class="contact-info-one__icon">
+                        <i class="oberlin-icon-email"></i>
+                    </div><!-- /.contact-info-one__icon -->
+                    <h3>Email Address</h3>
+                    <p><a href="mailto:info@oberlin.com">info@oberlin.com</a> <br> <a
+                            href="mailto:info@oberlin.company.com">info@oberlin.company.com</a></p>
+                </div><!-- /.contact-info-one__single -->
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4 wow fadeInDown" data-wow-duration="1500ms">
+                <div class="contact-info-one__single text-center">
+                    <div class="contact-info-one__icon">
+                        <i class="oberlin-icon-phone"></i>
+                    </div><!-- /.contact-info-one__icon -->
+                    <h3>Phone Number</h3>
+                    <p><a href="tel:+2(305)-587-3407">+2(305) 587-3407</a> <br> <a href="tel:+2(305)-587-3407">+2(305)
+                            587-3407</a></p>
+                </div><!-- /.contact-info-one__single -->
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                <div class="contact-info-one__single text-center">
+                    <div class="contact-info-one__icon">
+                        <i class="oberlin-icon-marker"></i>
+                    </div><!-- /.contact-info-one__icon -->
+                    <h3>Office Address</h3>
+                    <p>Discover St, New York, <br> NY 10012, USA</p>
+                </div><!-- /.contact-info-one__single -->
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.contact-info-one -->
+
+<section class="contact-one">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>Apply for Job</p>
+            <h3>Apply for Oberlin <br> Career</h3>
+        </div><!-- /.block-title -->
+        <form [formGroup]="signupForm" class="contact-one__form contact-form-validated">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" placeholder="First Name" formControlName="firstName">
+                    <div *ngIf="signupForm.controls['firstName'].invalid && 
+                      (signupForm.controls['firstName'].touched || signupForm.controls['firstName'].dirty)">
+                        <div *ngIf="signupForm.controls['firstName'].errors.required" class="red">
+                            First name is required</div>
+                        <div *ngIf="signupForm.controls['firstName'].errors.minlength" class="red">
+                            First Name must have at least 3 chars
+                        </div>
+                        <div *ngIf="signupForm.controls['firstName'].errors.maxlength" class="red">
+                            First Name must have at most 20 chars
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 FIRST NAME-->
+                <div class="col-md-6">
+                    <input type="text" placeholder="Last Name" formControlName="lastName">
+                    <div *ngIf="signupForm.controls['lastName'].invalid && 
+                      (signupForm.controls['lastName'].touched || signupForm.controls['lastName'].dirty)">
+                        <div *ngIf="signupForm.controls['lastName'].errors.required" class="red">
+                            First name is required</div>
+                        <div *ngIf="signupForm.controls['lastName'].errors.minlength" class="red">
+                            First Name must have at least 3 chars
+                        </div>
+                        <div *ngIf="signupForm.controls['lastName'].errors.maxlength" class="red">
+                            First Name must have at most 20 chars
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 LAST NAME -->
+                <div class="col-md-6">
+                    <input type="email" placeholder="Email Address" formControlName="email">
+                    <div
+                        *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].touched || signupForm.controls['email'].dirty)">
+                        <div *ngIf="signupForm.controls['email'].errors.required" class="red">
+                            Email is required</div>
+                        <div *ngIf="signupForm.controls['email'].errors.email" class="red">
+                            format email invalid </div>
+                    </div>
+                    <div *ngIf="emailExist" class="red"> Email alredy exist!</div>
+                </div><!-- /.col-md-6 EMAIL -->
+                <div class="col-md-6">
+                    <input type="number" placeholder="Phone Number" formControlName="tel">
+                    <div *ngIf="signupForm.controls['tel'].invalid && 
+                            (signupForm.controls['tel'].touched || signupForm.controls['tel'].dirty)">
+                        <div *ngIf="signupForm.controls['tel'].errors.required" class="red">
+                            Tel is required</div>
+                        <div *ngIf="signupForm.controls['tel'].errors.pattern" class="red">
+                            Tel must have 8 numbers
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 TEL -->          
+                <div class="col-md-6">
+                    <input type="password" placeholder="Password" formControlName="pwd">
+                    <div *ngIf="signupForm.controls['pwd'].invalid && 
+                          (signupForm.controls['pwd'].touched || signupForm.controls['pwd'].dirty)">
+                        <div *ngIf="signupForm.controls['pwd'].errors.required" class="red">
+                            Password is required</div>
+                        <div *ngIf="signupForm.controls['pwd'].errors.minlength" class="red">
+                            Password must have at least 6 chars</div>
+                        <div *ngIf="signupForm.controls['pwd'].errors.maxlength" class="red">
+                            Password must have at most 20 chars</div>
+                        <div *ngIf="signupForm.controls['pwd'].errors.pattern" class="red">
+                            Password must contain numbers, letters and special caracters</div>
+                    </div>
+                </div><!-- /.col-md-6 PASSWORD-->
+                <div class="col-md-6">
+                    <input type="password" placeholder="Confirm Password" formControlName="confirmPwd">
+                    <div
+                        *ngIf="signupForm.controls['confirmPwd'].invalid &&  (signupForm.controls['confirmPwd'].touched || signupForm.controls['confirmPwd'].dirty)">
+                        <div *ngIf="signupForm.controls['confirmPwd'].errors.confirmError" class="red">
+                            Confirm password does not match pwd !</div>
+                    </div>
+                </div><!-- /.col-md-6 CONFIRM PASSWORD-->
+                <div class="col-md-6">
+                    <input type="text" placeholder="Adress" formControlName="adress">
+                    <div
+                        *ngIf="signupForm.controls['adress'].invalid &&  (signupForm.controls['adress'].touched || signupForm.controls['confirmPwd'].dirty)">
+                        <div *ngIf="signupForm.controls['adress'].errors.required" class="red">
+                            Adress is required</div>
+                    </div>
+                </div><!-- /.col-md-6  ADRESS-->
+                <div *ngIf="path=='/signup'" class="col-md-6">
+                    <input type="number" placeholder="Experience" formControlName="exp">
+                    <div *ngIf="signupForm.controls['exp'].invalid && 
+                            (signupForm.controls['exp'].touched || signupForm.controls['exp'].dirty)">
+                        <div *ngIf="signupForm.controls['exp'].errors.required" class="red">
+                            Experience is required</div>
+                        <div *ngIf="signupForm.controls['exp'].errors.min" class="red">
+                            Please check number of years
+                        </div>
+                        <div *ngIf="signupForm.controls['exp'].errors.max" class="red">
+                            Experience must have at most 25 years
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 EXPERIENCE-->
+                <div class="col-md-12">
+                    <div class="col-md-6" style="visibility: hidden;">
+                        <input type="file" class="form-control" #filePicker (change)="onImageSelected($event)">
+                    </div>
+                    <button class="thm-btn contact-one__btn" (click)="filePicker.click()">Please put your
+                        avatar</button>
+                    <img [src]="imagePreview" *ngIf="imagePreview" class="pt-3 pb-3" width="200px" height="200px"
+                        alt="No Image">
+                </div><!-- /.col-md-6 AVATAR-->
+                <div *ngIf="path=='/signup'" class="col-md-12">
+                    <div class="col-md-6" style="visibility: hidden;">
+                        <input type="file"  class="form-control" #cvPicker (change)="onCvSelected($event)">
+                    </div>
+                    <button class="thm-btn contact-one__btn" (click)="cvPicker.click()">Please put your
+                        CV</button>
+                    <iframe [src]="cvPreview | pdf" *ngIf="cvPreview" class="pt-3 pb-3" width="500px" height="500px"
+                        alt="No cv"></iframe>
+                </div><!-- /.col-md-6 CV-->
+        
+                <div class="col-md-12 text-center">
+                    <button (click)="signup()" class="thm-btn contact-one__btn">Submit Now</button>
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </form>
+        
+    </div><!-- /.container -->
+</section><!-- /.contact-one -->

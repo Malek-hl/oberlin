@@ -1,0 +1,76 @@
+<app-banner title="Log In"></app-banner>
+<section class="contact-info-one">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>Contact Us</p>
+            <h3>Get In Touch</h3>
+        </div><!-- /.block-title -->
+        <div class="row">
+            <div class="col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                <div class="contact-info-one__single text-center">
+                    <div class="contact-info-one__icon">
+                        <i class="oberlin-icon-email"></i>
+                    </div><!-- /.contact-info-one__icon -->
+                    <h3>Email Address</h3>
+                    <p><a href="mailto:info@oberlin.com">info@oberlin.com</a> <br> <a
+                            href="mailto:info@oberlin.company.com">info@oberlin.company.com</a></p>
+                </div><!-- /.contact-info-one__single -->
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4 wow fadeInDown" data-wow-duration="1500ms">
+                <div class="contact-info-one__single text-center">
+                    <div class="contact-info-one__icon">
+                        <i class="oberlin-icon-phone"></i>
+                    </div><!-- /.contact-info-one__icon -->
+                    <h3>Phone Number</h3>
+                    <p><a href="tel:+2(305)-587-3407">+2(305) 587-3407</a> <br> <a href="tel:+2(305)-587-3407">+2(305)
+                            587-3407</a></p>
+                </div><!-- /.contact-info-one__single -->
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                <div class="contact-info-one__single text-center">
+                    <div class="contact-info-one__icon">
+                        <i class="oberlin-icon-marker"></i>
+                    </div><!-- /.contact-info-one__icon -->
+                    <h3>Office Address</h3>
+                    <p>Discover St, New York, <br> NY 10012, USA</p>
+                </div><!-- /.contact-info-one__single -->
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.contact-info-one -->
+
+<section class="contact-one">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>Apply for Job</p>
+            <h3>Log In</h3>
+        </div><!-- /.block-title -->
+        <form [formGroup]="loginForm" class="contact-one__form contact-form-validated">
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" placeholder="Email ou Tel" formControlName="userName">
+                    <div *ngIf="loginForm.controls['userName'].invalid && 
+                         (loginForm.controls['userName'].touched || loginForm.controls['userName'].dirty)">
+                        <div *ngIf="loginForm.controls['userName'].errors.required" class="red">
+                            Email/Tel is required</div>
+                    </div>
+                </div><!-- /.col-md-6 LOGIN-->
+                <div class="col-md-12">
+                    <input type="password" placeholder="Password" formControlName="pwd">
+                    <div *ngIf="loginForm.controls['pwd'].invalid && 
+                         (loginForm.controls['pwd'].touched || loginForm.controls['pwd'].dirty)">
+                        <div *ngIf="loginForm.controls['pwd'].errors.required" class="red">
+                            Password is required</div>
+                    </div>
+                </div><!-- /.col-md-6 PASSWORD-->
+
+                <div class="col-md-12 text-center">
+                    <button (click)=" login()" [disabled]="loginForm.invalid" class="thm-btn contact-one__btn">Login</button>
+                    <!-- /.thm-btn contact-one__btn -->
+                    <div style="color: red;">{{emailError}}</div>
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </form>
+        <div class="result"></div><!-- /.result -->
+    </div><!-- /.container -->
+</section><!-- /.contact-one -->

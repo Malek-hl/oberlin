@@ -1,0 +1,77 @@
+<app-banner title="Admin"></app-banner>
+<section class="living-option-two">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="living-option-two__main">
+                    <div class="block-title text-left">
+                        <p class="has-line"> Dashbord</p><!-- /.has-line -->
+                    </div><!-- /.block-title text-left -->
+                    <div class="nav navtabs living-option-two__tab-title">
+                        <a href="#users" data-toggle="tab" class="nav-link active">Admins*</a>
+                        <!-- /.nav-link -->
+                        <a href="#accomp" data-toggle="tab" class="nav-link ">Accompagnants*</a>
+                        <!-- /.nav-link -->
+                        <a href="#client" data-toggle="tab" class="nav-link">Clients*</a>
+                        <a href="#pub" data-toggle="tab" class="nav-link">Publications*</a>
+                        <a href="#search" data-toggle="tab" class="nav-link">Search*</a>
+                        <!-- /.nav-link -->
+                    </div><!-- /.nav navtabs living-option-two__tab-title -->
+                </div><!-- /.living-option-two__main -->
+            </div><!-- /.col-lg-6 -->
+
+            <div class="col-lg-10">
+                <div class="tab-content">
+                    <div class="tab-pane fade active animated fadeInRight" id="users">
+                        <app-users-table role="admin"></app-users-table>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+                    
+                    <div class="tab-pane fade show  animated fadeInRight" id="accomp">
+                        <app-users-table role="accompagnant"></app-users-table>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="client">
+                        <app-users-table role="client"></app-users-table>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="pub">
+                        <table class="table text-center">
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Client</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr *ngFor="let u  of pageOfItems">
+                                <td>{{u.title}}</td>
+                                <td>{{u.description}}</td>
+                                <td><button (click)="profile(u._id)"  class="btn btn-primary py-2 px-3 text-white">Profile </button></td>
+                                <td><button (click)="confirm(u._id)" class="btn btn-primary py-2 px-3 text-white">{{u.status}} </button></td>
+                                <td><button (click)="delete(u._id)" class="btn btn-primary py-2 px-3 text-white">Delete </button></td>
+                            </tr>
+                            <!-- Pagination: justify-content-center -->
+                        </table>
+                        <div class="card-footer  pb-0 pt-3 ">
+                            <jw-pagination [items]="pubs" [pageSize]="6" (changePage)="onChangePage($event)"></jw-pagination>
+                        </div>
+                        
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                    <div class="tab-pane fade  animated fadeInRight" id="search">
+                        <form class="m-3 text-center">
+                            <div class="form-group">
+                                <label for=""> Name </label>
+                                <input type="text" class="form-control" [(ngModel)]="name"
+                                    [ngModelOptions]="{standalone: true}">
+                            </div>
+                            {{team}}
+                        </form>
+                    </div><!-- /.tab-pane fade show animated fadeInRight -->
+
+                </div><!-- /.tab-content -->
+
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.living-option-two -->
