@@ -1,0 +1,140 @@
+<app-banner [title]=formTitle></app-banner>
+
+<section class="contact-one">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>Edit User</p>
+            <h3>first last name <br> role</h3>
+        </div><!-- /.block-title -->
+        <form [formGroup]="editForm" class="contact-one__form contact-form-validated">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="">First Name</label>
+                    <input type="text" placeholder="First Name" formControlName="firstName">
+                    <div *ngIf="editForm.controls['firstName'].invalid && 
+                      (editForm.controls['firstName'].touched || editForm.controls['firstName'].dirty)">
+                        <div *ngIf="editForm.controls['firstName'].errors.required" class="red">
+                            First name is required</div>
+                        <div *ngIf="editForm.controls['firstName'].errors.minlength" class="red">
+                            First Name must have at least 3 chars
+                        </div>
+                        <div *ngIf="editForm.controls['firstName'].errors.maxlength" class="red">
+                            First Name must have at most 20 chars
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 FIRST NAME-->
+                <div class="col-md-6">
+                    <label for="">Last Name</label>
+                    <input type="text" placeholder="Last Name" formControlName="lastName">
+                    <div *ngIf="editForm.controls['lastName'].invalid && 
+                      (editForm.controls['lastName'].touched || editForm.controls['lastName'].dirty)">
+                        <div *ngIf="editForm.controls['lastName'].errors.required" class="red">
+                            First name is required</div>
+                        <div *ngIf="editForm.controls['lastName'].errors.minlength" class="red">
+                            First Name must have at least 3 chars
+                        </div>
+                        <div *ngIf="editForm.controls['lastName'].errors.maxlength" class="red">
+                            First Name must have at most 20 chars
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 LAST NAME -->
+                <div class="col-md-6">
+                    <label for="">Email</label>
+                    <input type="email" placeholder="Email Address" formControlName="email">
+                    <div
+                        *ngIf="editForm.controls['email'].invalid && (editForm.controls['email'].touched || editForm.controls['email'].dirty)">
+                        <div *ngIf="editForm.controls['email'].errors.required" class="red">
+                            Email is required</div>
+                        <div *ngIf="editForm.controls['email'].errors.email" class="red">
+                            format email invalid </div>
+                    </div>
+                    <div *ngIf="emailExist" class="red"> Email alredy exist!</div>
+                </div><!-- /.col-md-6 EMAIL -->
+                <div class="col-md-6">
+                    <label for="">Tel</label>
+                    <input type="number" placeholder="Phone Number" formControlName="tel">
+                    <div *ngIf="editForm.controls['tel'].invalid && 
+                            (editForm.controls['tel'].touched || editForm.controls['tel'].dirty)">
+                        <div *ngIf="editForm.controls['tel'].errors.required" class="red">
+                            Tel is required</div>
+                        <div *ngIf="editForm.controls['tel'].errors.pattern" class="red">
+                            Tel must have 8 numbers
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 TEL -->          
+                <!-- <div class="col-md-6">
+                    <input type="password" placeholder="Password" formControlName="pwd">
+                    <div *ngIf="editForm.controls['pwd'].invalid && 
+                          (editForm.controls['pwd'].touched || editForm.controls['pwd'].dirty)">
+                        <div *ngIf="editForm.controls['pwd'].errors.required" class="red">
+                            Password is required</div>
+                        <div *ngIf="editForm.controls['pwd'].errors.minlength" class="red">
+                            Password must have at least 6 chars</div>
+                        <div *ngIf="editForm.controls['pwd'].errors.maxlength" class="red">
+                            Password must have at most 20 chars</div>
+                        <div *ngIf="editForm.controls['pwd'].errors.pattern" class="red">
+                            Password must contain numbers, letters and special caracters</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <input type="password" placeholder="Confirm Password" formControlName="confirmPwd">
+                    <div
+                        *ngIf="editForm.controls['confirmPwd'].invalid &&  (editForm.controls['confirmPwd'].touched || editForm.controls['confirmPwd'].dirty)">
+                        <div *ngIf="editForm.controls['confirmPwd'].errors.confirmError" class="red">
+                            Confirm password does not match pwd !</div>
+                    </div>
+                </div> -->
+                <div class="col-md-6">
+                    <label for="">Adress</label>
+                    <input type="text" placeholder="Adress" formControlName="adress">
+                    <div
+                        *ngIf="editForm.controls['adress'].invalid &&  (editForm.controls['adress'].touched || editForm.controls['confirmPwd'].dirty)">
+                        <div *ngIf="editForm.controls['adress'].errors.required" class="red">
+                            Adress is required</div>
+                    </div>
+                </div><!-- /.col-md-6  ADRESS-->
+                <div *ngIf="user.role == 'accompagnant'" class="col-md-6">
+                    <label for="">Experience</label>
+                    <input type="number" placeholder="Experience" formControlName="exp">
+                    <div *ngIf="editForm.controls['exp'].invalid && 
+                            (editForm.controls['exp'].touched || editForm.controls['exp'].dirty)">
+                        <div *ngIf="editForm.controls['exp'].errors.required" class="red">
+                            Experience is required</div>
+                        <div *ngIf="editForm.controls['exp'].errors.min" class="red">
+                            Please check number of years
+                        </div>
+                        <div *ngIf="editForm.controls['exp'].errors.max" class="red">
+                            Experience must have at most 25 years
+                        </div>
+                    </div>
+                </div><!-- /.col-md-6 EXPERIENCE-->
+                <div class="col-md-12">
+                    <div class="col-md-6" style="visibility: hidden;">
+                        <input type="file" class="form-control" #filePicker (change)="onImageSelected($event)">
+                    </div>
+                    <button class="thm-btn contact-one__btn" (click)="filePicker.click()">Please put your
+                        avatar</button>
+                    <img  [src]="imagePreview" *ngIf="imagePreview" class="pt-3 pb-3" width="200px" height="200px"
+                        alt="No Image">
+                        <img [src]=user.avatar *ngIf="user" class="pt-3 pb-3" width="200px" height="200px"
+                        alt="No Image">    
+                       
+                </div><!-- /.col-md-6 AVATAR-->
+                <div *ngIf="user.role == 'accompagnant'" class="col-md-12">
+                    <div class="col-md-6" style="visibility: hidden;">
+                        <input type="file"  class="form-control" #cvPicker (change)="onCvSelected($event)">
+                    </div>
+                    <button class="thm-btn contact-one__btn" (click)="cvPicker.click()">Please put your
+                        CV</button>
+                    <iframe [src]="cvPreview | pdf" *ngIf="cvPreview" class="pt-3 pb-3" width="500px" height="500px"
+                        alt="No cv"></iframe>
+                </div><!-- /.col-md-6 CV-->
+        
+                <div class="col-md-12 text-center">
+                    <button (click)="edit()"  class="thm-btn contact-one__btn">Edit Now</button>
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </form>
+        
+    </div><!-- /.container -->
+</section><!-- /.contact-one -->
